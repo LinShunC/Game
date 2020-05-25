@@ -64,7 +64,7 @@ void Player::simulate_AI(Uint32 milliseconds_to_simulate, Assets* assets, Input*
 		{
 			push_state(State::Attack, assets);
 		}
-		else if (distance_to_player < 50.0f)
+		 if (distance_to_enemy <	10.0f)
 		{
 			push_state(State::Dieing, assets);
 		}
@@ -84,7 +84,7 @@ void Player::simulate_AI(Uint32 milliseconds_to_simulate, Assets* assets, Input*
 		{
 			push_state(State::Attack, assets);
 		}
-		else if (distance_to_player < 50.0f)
+		else if (distance_to_enemy < 10.0f)
 		{
 			push_state(State::Dieing, assets);
 		}
@@ -99,7 +99,7 @@ void Player::simulate_AI(Uint32 milliseconds_to_simulate, Assets* assets, Input*
 			pop_state(assets);
 		}
 
-		else if (distance_to_player < 50.0f)
+		else if (distance_to_enemy < 10.0f)
 		{
 			push_state(State::Dieing, assets);
 		}
@@ -115,11 +115,11 @@ void Player::simulate_AI(Uint32 milliseconds_to_simulate, Assets* assets, Input*
 		break;
 	case State::Dieing:
 		
-		 if (distance_to_player > 50.0f && _velocity.magnitude() == 0.0f)
-		{
-			pop_state(assets);
-		}
-		 else if (distance_to_player > 50.0f && input->is_button_state(Input::Button::SLIDE, Input::Button_State::DOWN) && _velocity.magnitude() > 0.0f)
+		// if (distance_to_player > 50.0f && _velocity.magnitude() == 0.0f)
+	//	{
+	//		pop_state(assets);
+	//	}
+		  if (distance_to_player > 50.0f && input->is_button_state(Input::Button::SLIDE, Input::Button_State::DOWN) && _velocity.magnitude() > 0.0f)
 		 {
 			 push_state(State::slide, assets);
 		 }
@@ -361,4 +361,9 @@ string Player::getState()
 void Player::setDieState()
 {
 	_state.top() = State::Dieing;
+}
+
+void Player::DistanceToEnemy(float distance)
+{
+	distance_to_enemy = distance;
 }

@@ -19,7 +19,7 @@ public:
 	void resetSpeed();
 	void resetSize();
 	float speed();
-
+	void DistanceToEnemy(float distance);
 
 	enum class State
 	{
@@ -39,6 +39,7 @@ private:
 	void handle_exit_state(State state, Assets* assets);
 	std::stack<State> _state;
 
+	float distance_to_enemy;
 	int _current_run_timer_ms;
 	int _next_run_time_ms;
 

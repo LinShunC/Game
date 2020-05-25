@@ -40,26 +40,27 @@ void Enemy::simulate_AI(Uint32 milliseconds_to_simulate, Assets*, Input*, Scene*
 	{
 		Enemy* enemy = (Enemy*)scene->get_game_object(id());
 		enemy->setID("enemy.dieing");
+		player->DistanceToEnemy(distance_to_player);
 
 	}
-	else if (player->getState() != "attack" && distance_to_player <= 50.f)
+	else  if (/*player->getState() != "attack" && distance_to_player <= 30.f && */_texture_id != "enemy.dieing")
 	{
-		player->setDieState();
+		player->DistanceToEnemy(distance_to_player);
 	}
-
+	
 	if (_texture_id == "enemy.run" && time_when_dead <= 0)
 	{
 		time_when_dead = 890;
 	}
-	if (_translation.x() < 200.f && !_has_spawned_another)
+	/*if (_translation.x() < 200.f && !_has_spawned_another)
 	{
-		scene->add_game_object(new Enemy(id() + ".Next"));
-		_has_spawned_another = true;
+		//scene->add_game_object(new Enemy(id()));
+	//	_has_spawned_another = true;
 
 	   //  Enemy* enemy = (Enemy*)scene->get_game_object(id());
 		// enemy->setID("enemy.dieing");
 		 
-	}
+	}*/
 
 
 	 if (_texture_id == "enemy.dieing")
@@ -69,7 +70,7 @@ void Enemy::simulate_AI(Uint32 milliseconds_to_simulate, Assets*, Input*, Scene*
 			if (time_when_dead <= 0)
 			{
 				scene->remove_game_object(id());
-			
+				scene->add_game_object(new Enemy(id()));
 			}
 		
 	}
